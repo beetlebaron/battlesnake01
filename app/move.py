@@ -1,4 +1,5 @@
 import numpy as np
+import math as math
 
 from pathfinding.core.diagonal_movement import DiagonalMovement
 from pathfinding.core.grid import Grid
@@ -6,10 +7,11 @@ from pathfinding.finder.a_star import AStarFinder
 
 UNOCCUPIED = 1
 OCCUPIED   = -1
-FOOD       = 1
+FOOD       = 2
 HEAD       = -2
 TAIL       = 4
 HEALTHLIM = 25
+FOODDIST = 3
 game_state = ""
 directions = {'up': 0, 'down': 0, 'left': 0, 'right': 0}
 
@@ -29,6 +31,7 @@ def calculate_move(board_matrix, game_state):
         directions["up"] = -1000
     else:
         directions["up"] = sum(board_matrix, head["x"], head["y"] - 1, height, game_state)
+        directions["up"] -= int(y-1 <= 1 )*500
 
 
     # Check down
@@ -36,14 +39,14 @@ def calculate_move(board_matrix, game_state):
         directions["down"] = -1000
     else:
         directions["down"] = sum(board_matrix, head["x"], head["y"] + 1, height, game_state)
-
+        directions["down"] -= int(y+1 > height -2 )*500
 
     # Check Left
     if head["x"] - 1 < 0 or board_matrix[y][x-1] == OCCUPIED :
         directions["left"] = -1000
     else:
         directions["left"] = sum(board_matrix, head["x"] - 1, head["y"], height, game_state)
-
+        directions["left"] -= int(x-1 <= 1)*500
 
     # check right
     if head["x"] + 1 > (height - 1) or board_matrix[y][x+1]== OCCUPIED :
@@ -54,7 +57,40 @@ def calculate_move(board_matrix, game_state):
     if( health < HEALTHLIM and len(game_state['board']['food'])>0):
         find_food(game_state, board_matrix)
 
-
+	# Manipulate the food array
+	# Goal is that if the food is close and no obstacles, the snake should go for the food
+	arrFood = np.zeros([len(game_state["board"]["food"]),3])
+	#print(len(game_state["board"]["food"]))
+#	print(arrFood)
+	i = 0
+	for loc in game_state["board"]["food"]:
+		# Hopefully grab the indices for all of the food so we can find the closest food
+		
+		arrFood[i,0] = loc["y"]
+		arrFood[i,1] = loc["x"]
+		# Calculate the distance to foody
+		arrFood[i,2] = math.sqrt((arrFood[i,0]-y)**2+(arrFood[i,1]-x)**2)
+		i += 1
+	
+	# return the index of the minimal distance
+	nearFood = np.argmin(arrFood[:,2])
+	#print(nearFood)
+	#print(arrFood[nearFood])
+	
+	# Location of food identified, move in that directions
+	# Pick directions
+	if arrFood[nearFood][0]-y > 0:
+		directions["down"] += 100
+		
+	else:
+		directions["up"] += 100
+		
+	if arrFood[nearFood][1]-x > 0:
+		directions["right"] += 100
+		
+	else:
+		directions["left"] += 100
+	
 
     print(max(directions, key=lambda k: directions[k]))
     quad(board_matrix, game_state)
@@ -216,7 +252,7 @@ def is_bigger(snek, game):
         print("length**************")
 
         return True
-    print("SNake length", snek, "our length ", len(game['you']['body']))
+    print("Snake length", snek, "our length ", len(game['you']['body']))
     return False
 
 def get_snek(x, y, game_state):

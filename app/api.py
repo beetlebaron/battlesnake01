@@ -16,7 +16,7 @@ def start_response(color):
             "Content-Type": "application/json"
         },
         body=json.dumps({
-            "color": "#af2fdb",
+            "color": "#AF2FDB",
 #			"headType": "sand-worm",
 			"headType": "fang",
 			"tailType": "curled"
