@@ -4,6 +4,8 @@ import random
 import bottle
 
 from api import ping_response, start_response, move_response, end_response
+from board import  update_board
+from move import calculate_move
 
 @bottle.route('/')
 def index():
@@ -47,21 +49,14 @@ def start():
 
 @bottle.post('/move')
 def move():
-
-    """
-    TODO: Using the data from the endpoint request object, your
-            snake AI must choose a direction to move in.
-    """
-
-    directions = ['up', 'down', 'left', 'right']
-    direction = random.choice(directions)
 	
+	directions = ['up', 'down', 'left', 'right']
 	game_state = bottle.request.json
-    new_board = update_board(game_state)
-
-    direction = calculate_move(new_board, game_state)
-
-    return move_response(direction)
+	
+	new_board = update_board(game_state)
+	direction = calculate_move(new_board,game_state)
+	
+	return move_response(direction)
 
 
 @bottle.post('/end')
