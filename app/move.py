@@ -68,7 +68,7 @@ def calculate_move(board_matrix, game_state):
 		
 		arrFood[i,0] = loc["y"]
 		arrFood[i,1] = loc["x"]
-		# Calculate the distance to foody
+		# Calculate the distance to food
 		arrFood[i,2] = math.sqrt((arrFood[i,0]-y)**2+(arrFood[i,1]-x)**2)
 		i += 1
 	
@@ -80,16 +80,16 @@ def calculate_move(board_matrix, game_state):
 	# Location of food identified, move in that directions
 	# Pick directions
 	if arrFood[nearFood][0]-y > 0:
-		directions["down"] += 100
+		directions["down"] += 500
 		
 	else:
-		directions["up"] += 100
+		directions["up"] += 500
 		
 	if arrFood[nearFood][1]-x > 0:
-		directions["right"] += 100
+		directions["right"] += 500
 		
 	else:
-		directions["left"] += 100
+		directions["left"] += 500
 	
 
     print(max(directions, key=lambda k: directions[k]))
