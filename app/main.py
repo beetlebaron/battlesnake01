@@ -41,23 +41,25 @@ def start():
     """
     print(json.dumps(data))
 
-    color = "#00FF00"
+    color = "#00FF66"
 
     return start_response(color)
 
-
 @bottle.post('/move')
 def move():
-    data = bottle.request.json
 
     """
     TODO: Using the data from the endpoint request object, your
             snake AI must choose a direction to move in.
     """
-    print(json.dumps(data))
 
     directions = ['up', 'down', 'left', 'right']
     direction = random.choice(directions)
+	
+	game_state = bottle.request.json
+    new_board = update_board(game_state)
+
+    direction = calculate_move(new_board, game_state)
 
     return move_response(direction)
 
