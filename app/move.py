@@ -35,7 +35,7 @@ def calculate_move(board_matrix, game_state):
 
 
     # Check down
-    if head["y"] + 1 > (height) - 3) or (board_matrix[y+1][x] ) == OCCUPIED :#and board_matrix[y+2][x] and board_matrix[y+2][x+1] and board_matrix[y+2][x-1]) == OCCUPIED :
+    if head["y"] + 1 > (height) - 3) or (board_matrix[y+1][x] and board_matrix[y+2][x] and board_matrix[y+2][x+1] and board_matrix[y+2][x-1]) == OCCUPIED :
         directions["down"] = -1000
     else:
         directions["down"] = sum(board_matrix, head["x"], head["y"] + 1, height, game_state)
