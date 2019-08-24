@@ -62,15 +62,15 @@ def calculate_move(board_matrix, game_state):
 	arrfood = np.zeros([len(game_state["board"]["food"]),3])
     print(arrfood)
 
-#   i = 0
-#	for loc in game_state["board"]["food"]:
-#		# Hopefully grab the indices for all of the food so we can find the closest food
-#		
-#		arrfood[i,0] = loc["y"]
-#		arrfood[i,1] = loc["x"]
-#		# Calculate the distance to food
-#		arrfood[i,2] = int(math.sqrt((arrfood[i,0]-y)**2+(arrfood[i,1]-x)**2))
-#        i += 1
+
+	for loc, i=0 in game_state["board"]["food"]:
+		# Hopefully grab the indices for all of the food so we can find the closest food
+		
+		arrfood[i,0] = loc["y"]
+		arrfood[i,1] = loc["x"]
+		# Calculate the distance to food
+        arrfood[i,2] = int(math.sqrt((arrfood[i,0]-y)**2+(arrfood[i,1]-x)**2))
+        i += 1
 #	
 #    # return the index of the minimal distance
 #    nearFood = np.argmin(arrfood[:,2])
