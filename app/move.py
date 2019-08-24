@@ -14,6 +14,7 @@ HEALTHLIM = 25
 FOODDIST = 3
 game_state = ""
 directions = {'up': 0, 'down': 0, 'left': 0, 'right': 0}
+LASTDIR = 'up'
 
 
 def calculate_move(board_matrix, game_state):
@@ -60,7 +61,6 @@ def calculate_move(board_matrix, game_state):
 
     # initialize the array of food positions
     arrfood = np.zeros([len(game_state["board"]["food"]),3])
-    print(arrfood)
 
 
     i=0
@@ -99,7 +99,11 @@ def calculate_move(board_matrix, game_state):
 #    print("DOWN", directions["down"])
 #    print("LEFT", directions["left"])
 #    print("RIGHT", directions["right"])
-    return max(directions, key=lambda k: directions[k])
+
+    # Final direction
+    final_dir = max(directions, key=lambda k: directions[k])
+
+    return final_dir
 
 
 def sum(matrix, x, y, height, gamestate):
