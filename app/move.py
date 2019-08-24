@@ -63,7 +63,8 @@ def calculate_move(board_matrix, game_state):
     print(arrfood)
 
 
-    for loc, i=0 in game_state["board"]["food"]:
+    i=0
+    for loc in game_state["board"]["food"]:
     # Hopefully grab the indices for all of the food so we can find the closest food
         arrfood[i,0] = loc["y"]
         arrfood[i,1] = loc["x"]
