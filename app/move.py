@@ -91,8 +91,8 @@ def calculate_move(board_matrix, game_state):
        else:
             # means the food must be on a diagonal, so we'll just do nothing
             
-    if( health < HEALTHLIM and len(game_state['board']['food'])>0):
-        find_food(game_state, board_matrix)
+#    if( health < HEALTHLIM and len(game_state['board']['food'])>0):
+#        find_food(game_state, board_matrix)
 
 
     print(max(directions, key=lambda k: directions[k]))
