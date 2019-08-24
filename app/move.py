@@ -91,17 +91,16 @@ def calculate_move(board_matrix, game_state):
             directions["left"] += 750
         else:
         # means the food must be on a diagonal, so we'll just do nothing
-            
+        
     if( health < HEALTHLIM and len(game_state['board']['food'])>0):
         find_food(game_state, board_matrix)
 
-
-    print(max(directions, key=lambda k: directions[k]))
-    quad(board_matrix, game_state)
-    print("UP", directions["up"])
-    print("DOWN", directions["down"])
-    print("LEFT", directions["left"])
-    print("RIGHT", directions["right"])
+#    print(max(directions, key=lambda k: directions[k]))
+#    quad(board_matrix, game_state)
+#    print("UP", directions["up"])
+#    print("DOWN", directions["down"])
+#    print("LEFT", directions["left"])
+#    print("RIGHT", directions["right"])
     return max(directions, key=lambda k: directions[k])
 
 
@@ -113,7 +112,7 @@ def sum(matrix, x, y, height, gamestate):
             sum += 0
         else:
             sum += -100
-            print(snek)
+#            print(snek)
 
     if (x - 1) >= 0:
         sum += matrix[y][x-1]
@@ -123,7 +122,7 @@ def sum(matrix, x, y, height, gamestate):
                 sum += 200
             else:
                 sum += -75
-                print(snek)
+#                print(snek)
 
     if (x + 1) < height:
         sum += matrix[y][x+1]
@@ -133,7 +132,7 @@ def sum(matrix, x, y, height, gamestate):
                 sum += 200
             else:
                 sum += -75
-                print(snek)
+#                print(snek)
 
     if (y - 1) >= 0:
         sum += matrix[y-1][x]
@@ -143,7 +142,7 @@ def sum(matrix, x, y, height, gamestate):
                 sum += 200
             else:
                 sum += -75
-                print(snek)
+#                print(snek)
 
     if (y + 1) < height:
         sum += matrix[y+1][x]
@@ -153,7 +152,7 @@ def sum(matrix, x, y, height, gamestate):
                 sum += 200
             else:
                 sum += -75
-                print(snek)
+#                print(snek)
 
     if (x-1) >= 0 and (y+1) < height:
         sum += matrix[y+1][x-1]
@@ -249,7 +248,7 @@ def quad(matrix, game_state):
     directions['down'] += (quad3 + quad4)/height
     directions['left'] += (quad1 + quad3)/height
     directions['right'] += (quad2 + quad4)/height
-    print(quad1, quad2, quad3, quad4)
+#    print(quad1, quad2, quad3, quad4)
 
 def is_bigger(snek, game):
     if len(game["you"]["body"]) > snek:
