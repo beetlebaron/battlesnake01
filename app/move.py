@@ -84,11 +84,11 @@ def calculate_move(board_matrix, game_state):
     # find the direction to the food. Pick that direction
        if arrFood[nearFood][0]-y = 1:
             directions["down"] += 750
-       if arrFood[nearFood][0]-y = -1:
+       elif arrFood[nearFood][0]-y = -1:
             directions["up"] += 750
-       if arrFood[nearFood][1]-x = 1:
+       elif arrFood[nearFood][1]-x = 1:
             directions["right"] += 750
-       if arrFood[nearFood][1]-x = 1:
+       elif arrFood[nearFood][1]-x = 1:
             directions["left"] += 750            
 
     print(max(directions, key=lambda k: directions[k]))
