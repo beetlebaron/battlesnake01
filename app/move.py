@@ -87,7 +87,7 @@ def calculate_move(board_matrix, game_state):
             directions["up"] += 750
         elif arrfood[nearFood][1]-x == 1:
             directions["right"] += 750
-        elif arrFood[nearFood][1]-x == 1:
+        elif arrfood[nearFood][1]-x == 1:
             directions["left"] += 750
 
     if( health < HEALTHLIM and len(game_state['board']['food'])>0):
