@@ -62,7 +62,7 @@ def calculate_move(board_matrix, game_state):
 	arrfood = np.zeros([len(game_state["board"]["food"]),3])
     print(arrfood)
 
-	i = 0
+#   i = 0
 #	for loc in game_state["board"]["food"]:
 #		# Hopefully grab the indices for all of the food so we can find the closest food
 #		
