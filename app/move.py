@@ -71,13 +71,13 @@ def calculate_move(board_matrix, game_state):
 		arrfood[i,2] = int(math.sqrt((arrfood[i,0]-y)**2+(arrfood[i,1]-x)**2))
 		i += 1
 	
-	# return the index of the minimal distance
-	nearFood = np.argmin(arrfood[:,2])
-	#print(nearFood)
-	#print(arrfood[nearFood])
-	
-	# Location of food identified, move in that directions
-	# Pick directions
+    # return the index of the minimal distance
+    nearFood = np.argmin(arrfood[:,2])
+    #print(nearFood)
+    #print(arrfood[nearFood])
+    
+    # Location of food identified, move in that directions
+    # Pick directions
     if arrfood[nearFood][2] == 1:
     # find the direction to the food. Pick that direction
         if arrfood[nearFood][0]-y == 1:
