@@ -83,12 +83,12 @@ def calculate_move(board_matrix, game_state):
     # find the direction to the food. Pick that direction
         if arrfood[nearFood][0]-y == 1:
             directions["down"] += 750
-#        elif arrfood[nearFood][0]-y == -1:
-#            directions["up"] += 750
-#        elif arrfood[nearFood][1]-x == 1:
-#            directions["right"] += 750
-#        elif arrFood[nearFood][1]-x == 1:
-#            directions["left"] += 750
+        elif arrfood[nearFood][0]-y == -1:
+            directions["up"] += 750
+        elif arrfood[nearFood][1]-x == 1:
+            directions["right"] += 750
+        elif arrFood[nearFood][1]-x == 1:
+            directions["left"] += 750
 
     if( health < HEALTHLIM and len(game_state['board']['food'])>0):
         find_food(game_state, board_matrix)
