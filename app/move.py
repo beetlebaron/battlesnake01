@@ -80,7 +80,7 @@ def calculate_move(board_matrix, game_state):
 	
 	# Location of food identified, move in that directions
 	# Pick directions
-    if nearFood == 1:
+    if arrFood[nearFood][2] == 1:
     # find the direction to the food. Pick that direction
        if arrFood[nearFood][0]-y == 1:
             directions["down"] += 750
