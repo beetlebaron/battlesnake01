@@ -39,26 +39,27 @@ def calculate_move(board_matrix, game_state):
         directions["down"] = -1000
     else:
         directions["down"] = sum(board_matrix, head["x"], head["y"] + 1, height, game_state)
-        directions["down"] -= int(y+1 > height -2 )*500
+        directions["down"] -= int(y+1 > height -1 )*500
 
     # Check Left
-    if head["x"] - 1 < 0+1 or (board_matrix[y][x-1] == OCCUPIED or board_matrix[y-1][x-2] == OCCUPIED or board_matrix[y][x-2] == OCCUPIED or board_matrix[y-2][x-2] == OCCUPIED ): #and board_matrix[y][x-2] and board_matrix[y+1][x-2] and board_matrix[y][x-1]
+    if head["x"] - 1 < 0+1 or (board_matrix[y][x-1] == OCCUPIED or board_matrix[y-1][x-2] == OCCUPIED or board_matrix[y][x-2] == OCCUPIED or board_matrix[y-2][x-2] == OCCUPIED ):
         directions["left"] = -1000
     else:
         directions["left"] = sum(board_matrix, head["x"] - 1, head["y"], height, game_state)
         directions["left"] -= int(x-1 <= 1)*500
 
     # check right
-    if head["x"] + 1 > (height - 2) or (board_matrix[y][x+1] == OCCUPIED ): #and board_matrix[y][x+2] and board_matrix[y+1][x+2] and board_matrix[y-1][x+2]
+    if head["x"] + 1 > (height - 2) or (board_matrix[y][x+1] == OCCUPIED or board_matrix[y-1][x+2] == OCCUPIED or board_matrix[y][x+2] == OCCUPIED or board_matrix[y+1][x+2] == OCCUPIED ):
         directions["right"] = -1000
     else:
         directions["right"] = sum(board_matrix, head["x"] + 1, head["y"], height, game_state)
+        directions["right"] -= int(x+1 <= height - 1)*500
 
     if( health < HEALTHLIM and len(game_state['board']['food'])>0):
         find_food(game_state, board_matrix)
 
 	# Manipulate the food array
-	# Goal is that if the food is close and no obstacles, the snake should go for the food
+	# Goal is that if the food is ADJACENT and no obstacles, the snake should go for the food
 	arrFood = np.zeros([len(game_state["board"]["food"]),3])
 	#print(len(game_state["board"]["food"]))
 #	print(arrFood)
@@ -69,7 +70,7 @@ def calculate_move(board_matrix, game_state):
 		arrFood[i,0] = loc["y"]
 		arrFood[i,1] = loc["x"]
 		# Calculate the distance to food
-		arrFood[i,2] = math.sqrt((arrFood[i,0]-y)**2+(arrFood[i,1]-x)**2)
+		arrFood[i,2] = int(math.sqrt((arrFood[i,0]-y)**2+(arrFood[i,1]-x)**2))
 		i += 1
 	
 	# return the index of the minimal distance
@@ -79,18 +80,16 @@ def calculate_move(board_matrix, game_state):
 	
 	# Location of food identified, move in that directions
 	# Pick directions
-	if arrFood[nearFood][0]-y > 0:
-		directions["down"] += 500
-		
-	else:
-		directions["up"] += 500
-		
-	if arrFood[nearFood][1]-x > 0:
-		directions["right"] += 500
-		
-	else:
-		directions["left"] += 500
-	
+    if nearFood = 1:
+    # find the direction to the food. Pick that direction
+       if arrFood[nearFood][0]-y = 1:
+            directions["down"] += 750
+       if arrFood[nearFood][0]-y = -1:
+            directions["up"] += 750
+       if arrFood[nearFood][1]-x = 1:
+            directions["right"] += 750
+       if arrFood[nearFood][1]-x = 1:
+            directions["left"] += 750            
 
     print(max(directions, key=lambda k: directions[k]))
     quad(board_matrix, game_state)
