@@ -101,8 +101,10 @@ def calculate_move(board_matrix, game_state):
 #    print("RIGHT", directions["right"])
 
     # Final direction
+    
     final_dir = max(directions, key=lambda k: directions[k])
-
+    LASTDIR = final_dir
+    print(LASTDIR)
     return final_dir
 
 
