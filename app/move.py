@@ -57,35 +57,39 @@ def calculate_move(board_matrix, game_state):
 
 	# Manipulate the food array
 	# Goal is that if the food is ADJACENT and no obstacles, the snake should go for the food
-	arrFood = np.zeros([len(game_state["board"]["food"]),3])
+    
+    # initialize the array of food positions
+	arrfood = np.zeros([len(game_state["board"]["food"]),3])
 
 	i = 0
 	for loc in game_state["board"]["food"]:
 		# Hopefully grab the indices for all of the food so we can find the closest food
 		
-		arrFood[i,0] = loc["y"]
-		arrFood[i,1] = loc["x"]
+		arrfood[i,0] = loc["y"]
+		arrfood[i,1] = loc["x"]
 		# Calculate the distance to food
-		arrFood[i,2] = int(math.sqrt((arrFood[i,0]-y)**2+(arrFood[i,1]-x)**2))
+		arrfood[i,2] = int(math.sqrt((arrfood[i,0]-y)**2+(arrfood[i,1]-x)**2))
 		i += 1
 	
 	# return the index of the minimal distance
-	nearFood = np.argmin(arrFood[:,2])
+	nearFood = np.argmin(arrfood[:,2])
 	#print(nearFood)
-	#print(arrFood[nearFood])
+	#print(arrfood[nearFood])
 	
 	# Location of food identified, move in that directions
 	# Pick directions
-    if arrFood[nearFood][2] == 1:
+    if arrfood[nearFood][2] == 1:
     # find the direction to the food. Pick that direction
-       if arrFood[nearFood][0]-y == 1:
+       if arrfood[nearFood][0]-y == 1:
             directions["down"] += 750
-       elif arrFood[nearFood][0]-y == -1:
+       elif arrfood[nearFood][0]-y == -1:
             directions["up"] += 750
-       elif arrFood[nearFood][1]-x == 1:
+       elif arrfood[nearFood][1]-x == 1:
             directions["right"] += 750
        elif arrFood[nearFood][1]-x == 1:
-            directions["left"] += 750            
+            directions["left"] += 750      
+       else:
+            #Do nothing
 
     if( health < HEALTHLIM and len(game_state['board']['food'])>0):
         find_food(game_state, board_matrix)
