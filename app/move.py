@@ -87,10 +87,10 @@ def calculate_move(board_matrix, game_state):
        elif arrfood[nearFood][1]-x == 1:
             directions["right"] += 750
        elif arrFood[nearFood][1]-x == 1:
-            directions["left"] += 750      
+            directions["left"] += 750
        else:
-            #Do nothing
-
+            # means the food must be on a diagonal, so we'll just do nothing
+            
     if( health < HEALTHLIM and len(game_state['board']['food'])>0):
         find_food(game_state, board_matrix)
 
